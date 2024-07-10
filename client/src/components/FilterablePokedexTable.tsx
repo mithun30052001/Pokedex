@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { trpc } from '../utils/trpc';
 import PokemonTypeSelection from './PokemonTypeSelection';
 import PokedexTable from './PokedexTable';
+import { Card, CardContent, Typography } from '@mui/material';
 
 const FilterablePokedexTable: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string | undefined>(undefined);
@@ -10,7 +11,19 @@ const FilterablePokedexTable: React.FC = () => {
   return (
     <div>
       <PokemonTypeSelection selectedType={selectedType} selectType={setSelectedType} />
-      {pokemons && <PokedexTable pokemons={pokemons} />}
+      {pokemons && pokemons?.length > 0 ? (
+        <PokedexTable pokemons={pokemons} />
+      ) : (
+        selectedType && (
+          <Card>
+            <CardContent>
+              <Typography variant="h6" align="center">
+                No Pokemon available for the selected type
+              </Typography>
+            </CardContent>
+          </Card>
+        )
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Grid } from '@mui/material';
+import { TextField, Button, Grid, Card, CardContent, Typography } from '@mui/material';
 import { trpc } from '../utils/trpc';
 import PokemonRow from './PokemonRow';
 import PokedexTable from './PokedexTable';
@@ -24,6 +24,9 @@ const PokeForm: React.FC = () => {
   useEffect(() => {
     if (query.data !== undefined) {
       setData(query.data as PokemonQueryResult);
+    }
+    else{
+      setData(null);
     }
   }, [query.data]);
 
@@ -53,7 +56,13 @@ const PokeForm: React.FC = () => {
         </Button>
       </Grid>
       <Grid item xs={12}>
-        {singleInput ? (
+        {searchInput && data === null ? (
+          <Card>
+            <CardContent>
+              <Typography variant="h6" align="center">Pokemon not found</Typography>
+            </CardContent>
+          </Card>
+        ) : singleInput ? (
           data && 'id' in data ? (
             <PokemonRow pokemon={data as Pokemon} />
           ) : null
