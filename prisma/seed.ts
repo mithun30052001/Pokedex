@@ -3,7 +3,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const types = ["grass", "fire"];
+  await prisma.pokemonType.deleteMany({});
+  await prisma.pokemon.deleteMany({});
+  await prisma.type.deleteMany({});
+
+  const types = ["grass", "fire", "water","electric"];
 
   for (const type of types) {
     await prisma.type.upsert({
@@ -16,14 +20,19 @@ async function main() {
   const pokemons = [
     {
       name: "Bulbasaur",
-      sprite: "https://pokemon.com/pictures/bulbasaur.png",
+      sprite: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png",
       types: ["grass"],
     },
     {
       name: "Charmander",
-      sprite: "https://pokemon.com/pictures/charmander.png",
+      sprite: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/003.png",
       types: ["fire"],
     },
+    {
+      name: "Pikachu",
+      sprite: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
+      types: ["fire","electric"]
+    }
   ];
 
   for (const pokemon of pokemons) {
