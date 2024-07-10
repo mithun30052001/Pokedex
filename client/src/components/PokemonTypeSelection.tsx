@@ -17,7 +17,7 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({ selectedTyp
       <Select
         labelId="pokemon-type-label"
         id="pokemon-type"
-        value={selectedType}
+        value={selectedType ?? ""}
         onChange={handleChange}
         label="Pokemon Type"
       >
