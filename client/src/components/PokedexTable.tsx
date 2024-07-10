@@ -9,6 +9,7 @@ import {
   Paper,
   TableSortLabel,
   Checkbox,
+  TablePagination,
 } from '@mui/material';
 
 interface PokedexTableProps {
@@ -24,6 +25,8 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
   const [orderBy, setOrderBy] = useState<string>('name');
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [selected, setSelected] = useState<number[]>([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (property: string) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -60,6 +63,15 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
     setSelected(newSelected);
   };
 
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
 
   const sortedPokemons = [...pokemons].sort((a, b) => {
@@ -69,6 +81,8 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
     }
     return (isAsc ? a.id - b.id : b.id - a.id);
   });
+
+  const paginatedPokemons = sortedPokemons.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <TableContainer component={Paper}>
@@ -96,7 +110,7 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {sortedPokemons.map((pokemon) => (
+          {paginatedPokemons.map((pokemon) => (
             <TableRow
               key={pokemon.id}
               hover
@@ -117,6 +131,15 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
           ))}
         </TableBody>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[1,5,10, 25]}
+        component="div"
+        count={pokemons.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </TableContainer>
   );
 };
