@@ -20,7 +20,7 @@ interface PokedexTableProps {
   }[];
 }
 
-const PokedexTableComponent: React.FC<PokedexTableProps> = ({ pokemons }) => {
+const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
   const [orderBy, setOrderBy] = useState<string>('name');
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [selected, setSelected] = useState<number[]>([]);
@@ -121,4 +121,4 @@ const PokedexTableComponent: React.FC<PokedexTableProps> = ({ pokemons }) => {
   );
 };
 
-export default PokedexTableComponent;
+export default PokedexTable;

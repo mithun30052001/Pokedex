@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Grid } from '@mui/material';
 import { trpc } from '../utils/trpc';
-import PokemonRowComponent from './PokemonRowComponent';
-import PokedexTableComponent from './PokedexTableComponent';
+import PokemonRow from './PokemonRow';
+import PokedexTable from './PokedexTable';
 import { PokemonQueryResult, Pokemon } from '../interface/types';
 
-const PokeFormComponent: React.FC = () => {
+const PokeForm: React.FC = () => {
   const [input, setInput] = useState('');
   const [searchInput, setSearchInput] = useState<string | string[]>('');
   const [data, setData] = useState<PokemonQueryResult | null>(null);
@@ -55,14 +55,14 @@ const PokeFormComponent: React.FC = () => {
       <Grid item xs={12}>
         {singleInput ? (
           data && 'id' in data ? (
-            <PokemonRowComponent pokemon={data as Pokemon} />
+            <PokemonRow pokemon={data as Pokemon} />
           ) : null
         ) : Array.isArray(data) && data.length > 0 ? (
-          <PokedexTableComponent pokemons={data as Pokemon[]} />
+          <PokedexTable pokemons={data as Pokemon[]} />
         ) : null}
       </Grid>
     </Grid>
   );
 };
 
-export default PokeFormComponent;
+export default PokeForm;

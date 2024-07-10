@@ -10,7 +10,7 @@ interface PokemonRowProps {
   };
 }
 
-const PokemonRowComponent: React.FC<PokemonRowProps> = ({ pokemon}) => (
+const PokemonRow: React.FC<PokemonRowProps> = ({ pokemon}) => (
   <TableRow>
     <TableCell>
       <img src={pokemon.sprite} alt={pokemon.name} width={50} height={50} />
@@ -24,4 +24,4 @@ const PokemonRowComponent: React.FC<PokemonRowProps> = ({ pokemon}) => (
   </TableRow>
 );
 
-export default PokemonRowComponent;
+export default PokemonRow;

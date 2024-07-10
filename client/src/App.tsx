@@ -3,8 +3,8 @@ import { Container, Box, Typography } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { trpc } from './utils/trpc';
 import { httpBatchLink } from '@trpc/client';
-import PokeFormComponent from './components/PokeFormComponent';
-import FilterablePokedexTable from './components/FilterablePokedexTableComponent';
+import PokeForm from './components/PokeForm';
+import FilterablePokedexTable from './components/FilterablePokedexTable';
 
 const App: React.FC = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -26,7 +26,7 @@ const App: React.FC = () => {
             <Typography variant="h5" gutterBottom>
               Find pokemon by Name
             </Typography>
-            <PokeFormComponent />
+            <PokeForm />
           </Box>
           <Box>
             <Typography variant="h5" gutterBottom>
