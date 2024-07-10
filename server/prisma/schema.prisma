@@ -26,5 +26,8 @@ model PokemonType {
   pokemonId Int
   type      Type     @relation(fields: [typeId], references: [id])
   typeId    Int
-}
 
+  @@index([pokemonId])
+  @@index([typeId])
+  @@index([pokemonId, typeId], name: "pokemon_type_index")
+}
