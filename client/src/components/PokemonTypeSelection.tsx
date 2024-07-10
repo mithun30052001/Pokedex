@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 type PokemonTypeSelectionProps = {
@@ -7,9 +7,9 @@ type PokemonTypeSelectionProps = {
 };
 
 const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({ selectedType, selectType }) => {
-  const handleChange = (e: any) => {
+  const handleChange = useCallback((e: any) => {
     selectType(e.target.value);
-  };
+  }, [selectType]);
 
   return (
     <FormControl variant="outlined" fullWidth={false} style={{ width: 200 }}>

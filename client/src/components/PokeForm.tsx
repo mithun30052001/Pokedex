@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { TextField, Button, Grid, Card, CardContent, Typography } from '@mui/material';
 import { trpc } from '../utils/trpc';
 import PokemonRow from './PokemonRow';
@@ -10,7 +10,7 @@ const PokeForm: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string | string[]>('');
   const [data, setData] = useState<PokemonQueryResult | null>(null);
 
-  const singleInput = typeof searchInput === 'string';
+  const singleInput = useMemo(() => typeof searchInput === 'string', [searchInput]);
   const query = trpc.getPokemon.useQuery(
     singleInput ? searchInput : (searchInput as string[]),
     {
@@ -30,14 +30,14 @@ const PokeForm: React.FC = () => {
     }
   }, [query.data]);
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     const inputs = input.split(/[, ]+/).map((i) => capitalizeFirstLetter(i.trim()));
     setSearchInput(inputs.length > 1 ? inputs : inputs[0]);
-  };
+  }, [input]);
 
-  const capitalizeFirstLetter = (input: string): string => {
+  const capitalizeFirstLetter = useCallback((input: string): string => {
     return input.charAt(0).toUpperCase() + input.slice(1);
-  };
+  }, []);
 
   return (
     <Grid container spacing={2}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ memo } from 'react';
 import { TableRow, TableCell, Typography, TableContainer, Table, TableBody, Paper } from '@mui/material';
 
 interface PokemonRowProps {
@@ -39,4 +39,4 @@ const PokemonRow: React.FC<PokemonRowProps> = ({ pokemon }) => (
   </>
 );
 
-export default PokemonRow;
+export default memo(PokemonRow);

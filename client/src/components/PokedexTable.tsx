@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useMemo,useCallback  } from 'react';
 import {
   Table,
   TableBody,
@@ -34,16 +34,16 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
     setOrder(isAsc ? 'desc' : 'asc');
   };
 
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectAllClick = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelecteds = pokemons.map((pokemon) => pokemon.id);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
-  };
+  }, [pokemons]);
 
-  const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+  const handleClick = useCallback((event: React.MouseEvent<unknown>, id: number) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected: number[] = [];
 
@@ -54,29 +54,33 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
     }
     
     setSelected(newSelected);
-  };
-  
+  }, [selected]);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = useCallback((event: unknown, newPage: number) => {
     setPage(newPage);
-  };
+  }, []);
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
+  }, []);
 
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
 
-  const sortedPokemons = [...pokemons].sort((a, b) => {
-    const isAsc = order === 'asc';
-    if (orderBy === 'name') {
-      return (isAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)) || a.id - b.id;
-    }
-    return (isAsc ? a.id - b.id : b.id - a.id);
-  });
+  const sortedPokemons = useMemo(() => {
+    return [...pokemons].sort((a, b) => {
+      const isAsc = order === 'asc';
+      if (orderBy === 'name') {
+        return (isAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)) || a.id - b.id;
+      }
+      return (isAsc ? a.id - b.id : b.id - a.id);
+    });
+  }, [pokemons, order, orderBy]);
 
-  const paginatedPokemons = sortedPokemons.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const paginatedPokemons = useMemo(() => {
+    return sortedPokemons.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [sortedPokemons, page, rowsPerPage]);
+
 
   return (
     <TableContainer component={Paper}>
