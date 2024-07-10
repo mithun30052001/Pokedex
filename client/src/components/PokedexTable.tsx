@@ -49,19 +49,13 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ pokemons }) => {
 
     if (selectedIndex === -1) {
       newSelected = [...selected, id];
-    } else if (selectedIndex === 0) {
-      newSelected = [...selected.slice(1)];
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = [...selected.slice(0, -1)];
-    } else if (selectedIndex > 0) {
-      newSelected = [
-        ...selected.slice(0, selectedIndex),
-        ...selected.slice(selectedIndex + 1),
-      ];
+    } else {
+      newSelected = selected.filter((selectedId) => selectedId !== id);
     }
-
+    
     setSelected(newSelected);
   };
+  
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
