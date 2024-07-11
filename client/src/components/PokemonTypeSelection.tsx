@@ -6,6 +6,15 @@ type PokemonTypeSelectionProps = {
   selectType: (type: string | undefined) => void;
 };
 
+const POKEMON_TYPES = [
+  { value: 'grass', label: 'Grass' },
+  { value: 'fire', label: 'Fire' },
+  { value: 'water', label: 'Water' },
+  { value: 'electric', label: 'Electric' },
+  { value: 'bug', label: 'Bug' },
+  { value: 'poison', label: 'Poison' },
+];
+
 const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({ selectedType, selectType }) => {
   const handleChange = useCallback((e: any) => {
     selectType(e.target.value);
@@ -21,12 +30,11 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({ selectedTyp
         onChange={handleChange}
         label="Pokemon Type"
       >
-        <MenuItem value="grass">Grass</MenuItem>
-        <MenuItem value="fire">Fire</MenuItem>
-        <MenuItem value="water">Water</MenuItem>
-        <MenuItem value="electric">Electric</MenuItem>
-        <MenuItem value="bug">Bug</MenuItem>
-        <MenuItem value="poison">Poison</MenuItem>
+        {POKEMON_TYPES.map((type) => (
+          <MenuItem key={type.value} value={type.value}>
+            {type.label}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
