@@ -49,4 +49,3 @@ Before you begin, ensure you have the following installed on your system:
     ```
 
     The server should now be running at `http://localhost:4000`.
-    ```
