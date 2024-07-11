@@ -25,6 +25,8 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({ selectedTyp
         <MenuItem value="fire">Fire</MenuItem>
         <MenuItem value="water">Water</MenuItem>
         <MenuItem value="electric">Electric</MenuItem>
+        <MenuItem value="bug">Bug</MenuItem>
+        <MenuItem value="poison">Poison</MenuItem>
       </Select>
     </FormControl>
   );
