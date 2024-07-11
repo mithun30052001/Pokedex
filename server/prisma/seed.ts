@@ -7,7 +7,7 @@ async function main() {
   await prisma.pokemon.deleteMany({});
   await prisma.type.deleteMany({});
 
-  const types = ["grass", "fire", "water","electric"];
+  const types = ["grass", "fire", "water","electric","bug","poison"];
 
   for (const type of types) {
     await prisma.type.upsert({
@@ -27,6 +27,11 @@ async function main() {
       name: "Charmander",
       sprite: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/003.png",
       types: ["fire"],
+    },
+    {
+      name: "Squirtle",
+      sprite: "https://img.pokemondb.net/artwork/avif/squirtle.avif",
+      types: ["water"]
     },
     {
       name: "Pikachu",
