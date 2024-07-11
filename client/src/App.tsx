@@ -5,6 +5,7 @@ import { trpc } from './utils/trpc';
 import { httpBatchLink } from '@trpc/client';
 import PokeForm from './components/PokeForm';
 import FilterablePokedexTable from './components/FilterablePokedexTable';
+import env from "react-dotenv";
 
 const App: React.FC = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -12,7 +13,7 @@ const App: React.FC = () => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: 'http://localhost:4000/trpc',
+          url: env.API_URL,
         }),
       ],
     })
