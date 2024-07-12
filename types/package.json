@@ -1,6 +1,22 @@
 {
-    "name": "local-trpc",
-    "version": "1.0.1",
-    "main": "index.js",
-    "types": "index.d.ts"
+  "name": "local-trpc",
+  "version": "1.0.8",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "undici-types": "^5.26.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "typescript": "^5.5.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
