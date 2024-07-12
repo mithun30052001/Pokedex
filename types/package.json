@@ -1,10 +1,12 @@
 {
   "name": "local-trpc",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
+    "@prisma/client": "^5.16.2",
+    "@trpc/server": "^10.45.2",
     "undici-types": "^5.26.5",
     "zod": "^3.23.8"
   },
