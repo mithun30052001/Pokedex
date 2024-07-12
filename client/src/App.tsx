@@ -13,7 +13,7 @@ const App: React.FC = () => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "https://pokedex-api-wheat.vercel.app/trpc/",
+          url: env.API_URL,
         }),
       ],
     })
