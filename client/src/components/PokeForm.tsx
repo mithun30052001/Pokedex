@@ -35,9 +35,9 @@ const PokeForm: React.FC = () => {
     setSearchInput(inputs.length > 1 ? inputs : inputs[0]);
   }, [input]);
 
-  const capitalizeFirstLetter = useCallback((input: string): string => {
+  const capitalizeFirstLetter = (input: string): string => {
     return input.charAt(0).toUpperCase() + input.slice(1);
-  }, []);
+  };
 
   return (
     <Grid container spacing={2}>
