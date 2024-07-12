@@ -27,7 +27,6 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "prebuild": "cp ../server/src/trpc/types.d.ts src/utils/types/",
     "start": "react-dotenv && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
