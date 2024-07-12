@@ -13,7 +13,7 @@ const App: React.FC = () => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: env.API_URL,
+          url: "http://localhost:4000/trpc/",
         }),
       ],
     })
